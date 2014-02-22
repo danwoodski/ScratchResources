@@ -16,7 +16,9 @@
 				echo "<span class='x' onclick=\"loadInfo('0','hide')\"> X </span>";
 				$title = $row[title];
 				$description = $row[description];
+				$type = $row[type];
 				$user = $row[user];
+				$ext = $row[fileExt];
 				$date = date('M d, Y',strtotime($row[timestamp]));
 				if($user==''){$user="Unknown";}
 				echo "<b style='font-size:2em;'>$title</b><br/>";
@@ -28,6 +30,8 @@
 					echo "Made for $program - <a href='help/import_$program' target='_new'>Import Help</a>";
 					echo "<b>";
 				}
+				$title = rawurlencode($title);
+				echo "<a href='uploads/$type/$title.$ext'>Download</a>";
 			}
 	}elseif($_GET[mode]=='lessInfo'){
 		$res1 = mysql_query("SELECT * FROM resources WHERE id='$_GET[id]'") or die(mysql_error());

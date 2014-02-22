@@ -104,3 +104,29 @@ ul.sideBar{
 	cursor:pointer;
 	margin:0;
 }
+.loginBox{
+font-size:25%;
+float: right;
+/*
+border-left: dotted white 3px;
+border-bottom: dotted white 3px;
+*/
+padding: 3px;
+color: white;
+}
+a:visited.login,a:active.login{
+color:white;
+}
+a:link.login{
+color:white;
+text-decoration:none;
+transition-property: color;
+transition-duration: .2s;
+transition-timing-function: ease-out;
+}
+a:hover.login{
+color:black;
+transition-property:color;
+transition-duration: .2s;
+transition-timing-function: ease-out;
+}

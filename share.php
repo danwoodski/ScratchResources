@@ -8,6 +8,15 @@
 			function InterForm(type){
 				$('.optional').fadeOut();
 				$('.'+type).fadeIn();
+				if(type=='background'){
+					$('#file').attr("accept","image/*");
+				}else if(type=='sprite'){
+					$('#file').attr("accept",".sprite2");
+				}else if(type=='script'){
+					$('#file').attr("accept",".sprite2,.sprite,.sb,.sb2");
+				}else if(type=='sound'){
+					$('#file').attr("accept","audio/*");
+				}
 			}
 		</script>
 	</head>
@@ -33,12 +42,11 @@
 					</div>
 					<!--------------->
 					
-					Title: <input type='text' required name='title' id='title' placeholder='Awesome Space Background' style='width:385px;'/><br/><br/>
+					Title: <input type='text' required name='title' id='title' style='width:385px;'/><br/><br/>
 					Description/Notes: <br/>
 					<textarea rows='5' cols='50' name='description' id='description'></textarea>
 					<br/><br/>
-					<input type="hidden" name="MAX_FILE_SIZE" value="100000" />
-					Upload File: <input type='file' name='file' id='file'/>
+					Upload File: <input type='file' name='file' id='file' accept='image/*'/>
 					<br/><br/>
 					<input type='submit' value='SUBMIT'/>
 				</form>

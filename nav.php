@@ -8,11 +8,11 @@ $.backstretch('bg.jpg');
 		if(isset($_SESSION[user])){
 			echo "Welcome, $_SESSION[user] | <a class='login' href='login.php?mode=logout'>Logout</a>";
 		}else{
-			echo "<a class='login' href='login.php'>Login</a> | <a class='login' href='newAccount'>New Account</a>";
+			echo "<a class='login' href='login.php'>Login</a> | <a class='login' href='newAccount.php'>New Account</a>";
 		}
 	?>
 </div>
-	Scratch Resources
+	Scratch Resources <span style='font-size:15px;'>Beta</span>
 </div>
 <ul class='mainMenu'>
 	<li class='mainMenuItem'><a href='index.php'>HOME</a></li>

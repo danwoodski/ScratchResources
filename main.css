@@ -52,6 +52,8 @@ margin:20px;
 box-shadow:0px 0px 7px black;
 z-index:2;
 position:relative;
+border-radius:7px;
+overflow:hidden;
 }
 .miniBox:hover{
 cursor:pointer;
@@ -129,4 +131,8 @@ color:black;
 transition-property:color;
 transition-duration: .2s;
 transition-timing-function: ease-out;
+}
+.link:hover{
+cursor:pointer;
+text-shadow:0px 0px 2px black;
 }

@@ -1,4 +1,5 @@
 <?php
+	session_start('SR');
 	//Add Login Checker Here
 	include "db.php";
 	$type = $_POST[type];
@@ -19,8 +20,13 @@
 	}
 	$path = $_FILES['file']['name'];
 	$ext = pathinfo($path, PATHINFO_EXTENSION);
-	rename($uploadfile, "uploads/$type/$title.$ext");
-	mysql_query("INSERT INTO resources (type,title,description,program,fileExt) VALUES ('$type','$title','$description','$program','$ext')") or die(mysql_error());
+	mysql_query("INSERT INTO resources (type,user,title,description,program,fileExt) VALUES ('$type','$_SESSION[user]','$title','$description','$program','$ext')") or die(mysql_error());
+	$res1 = mysql_query("SELECT * FROM resources ORDER BY timestamp DESC LIMIT 0,1") or die(mysql_error());
+		while($row = mysql_fetch_array($res1)){
+			$id = $row[id];
+		}
+	rename($uploadfile, "uploads/$type/$id-$title.$ext");
+	
 	switch($type){
 		case "background":
 			if($ext=='jpg' or $ext=='png' or $ext=='JPG' or $ext=='PNG' or $ext=='jpeg'){}else{

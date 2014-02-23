@@ -1,9 +1,16 @@
-<?php session_start('SR'); ?>
+<?php session_start('SR');
+include "db.php"; ?>
 <html>
 	<head>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 		<script src='backstretch.js' type='text/javascript'></script>
 		<script>
+			function deleteItem(id){
+			$('#popUp1').fadeOut();
+				$('#popUp1').load('browse2.php?mode=delete&id='+id,function(){
+					$('.miniBox.'+id).fadeOut();
+				});
+			}
 			function loadInfo(id,mode){
 				if (mode=='hide'){
 					$('#popUp1').hide();
@@ -25,6 +32,15 @@
 				$('#currentType').text(type);
 				$('.miniBox').fadeOut();
 				$('#loadingZone').load('browse2.php?mode=filter&type='+type+'&sort='+sort,function(){
+					$(".miniBox").each(function(index) {
+						$(this).delay(50*index).fadeIn(300);
+					});
+				});
+			}
+			function search(){
+				var query = $('#search').val();
+				$('.miniBox').fadeOut();
+				$('#loadingZone').load('browse2.php?mode=search&query='+query,function(){
 					$(".miniBox").each(function(index) {
 						$(this).delay(50*index).fadeIn(300);
 					});
@@ -53,9 +69,15 @@
 			<?php 
 			include "nav.php";
 			include "db.php";
+			echo "<datalist id='titles'>";
+				$res2 = mysql_query("SELECT * FROM resources") or die(mysql_error());
+					while($row = mysql_fetch_array($res2)){
+						echo "<option value='$row[title]'>";
+					}
+			echo "</datalist>";
 			echo "<div id='navContainer' style='position:fixed;width:1000px;z-index:1;'>";
 				echo "<ul class='sideBar' style='float:right;'>";
-					echo "<li><input type='text' name='search' id='search' placeholder='Search...' onchange='search()'/>
+					echo "<li><input type='text' name='search' id='search' placeholder='Search...' list='titles' onchange='search()'/>
 						<button style='width:40px;' onclick='search()'>GO!</button>
 						</li>";
 					echo "<li>Sort By: <select name='sort' id='sort' onchange='sort()'>";

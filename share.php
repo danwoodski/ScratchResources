@@ -22,6 +22,12 @@
 	</head>
 
 	<body>
+		<?php
+			if(!isset($_SESSION[user])){
+				echo "<script>alert('Please Login to continue.')</script>";
+				echo "<script>window.open('index.php','_self');</script>";//Add login box here eventually
+			}
+		?>
 		<div class='mainBody'>
 			<?php include "nav.php";?>
 			<div style='padding:5px;'>

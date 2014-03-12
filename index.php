@@ -33,10 +33,10 @@
 						$res1 = mysql_query("SELECT * FROM resources ORDER BY timestamp DESC LIMIT 0,10") or die(mysql_error());
 						//if(mysql_num_rows($res1)==0){echo "No Results.";}
 							while($row = mysql_fetch_array($res1)){
-								$type = $row[type];
-								$title = $row[title];
-								$description = $row[description];
-								$user = $row[user];
+								$type = htmlspecialchars($row[type]);
+								$title = htmlspecialchars($row[title]);
+								$description = htmlspecialchars($row[description]);
+								$user = htmlspecialchars($row[user]);
 								$date = date('Y-m-d');
 								if($user==''){$user="Unknown";}
 								echo "<div class='miniBox $row[id] column1' onclick=\"loadInfo('$row[id]')\" style='display:none;'>";
@@ -52,10 +52,10 @@
 						$res1 = mysql_query("SELECT * FROM resources ORDER BY timestamp ASC LIMIT 0,10") or die(mysql_error());
 						//if(mysql_num_rows($res1)==0){echo "No Results.";}
 							while($row = mysql_fetch_array($res1)){
-								$type = $row[type];
-								$title = $row[title];
-								$description = $row[description];
-								$user = $row[user];
+								$type = htmlspecialchars($row[type]);
+								$title = htmlspecialchars($row[title]);
+								$description = htmlspecialchars($row[description]);
+								$user = htmlspecialchars($row[user]);
 								$date = date('Y-m-d');
 								if($user==''){$user="Unknown";}
 								echo "<div class='miniBox column2 $row[id]' onclick=\"loadInfo('$row[id]')\" style='display:none;'>";

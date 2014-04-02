@@ -18,6 +18,7 @@ font-family: 'Roboto Slab', cursive;
 	text-align:center;
 	color:white;
 	text-shadow:0px 0px 2px black;
+	overflow:auto;
 }
 ul.mainMenu{
 	width: 100%;
@@ -72,7 +73,7 @@ box-shadow:0px 0px 7px black;
 	background-color: white;
 	width: 1000px;
 	height:100%;
-	top: 400px;
+	top: 134px;
 	box-shadow: 0px 0px 7px black;
 	z-index:3;
 }
@@ -135,4 +136,30 @@ transition-timing-function: ease-out;
 .link:hover{
 cursor:pointer;
 text-shadow:0px 0px 2px black;
+}
+.loginBox2{
+	background-color:green;
+	color:white;
+	position:relative;
+}
+td.loginBox3{
+	color:white;
+}
+.submitButton1{
+	width:100%;
+	background-color:green;
+	border-style:outset;
+	border-color:darkgreen;
+}
+.submitButton2{
+	width:100%;
+	background-color:red;
+	border-style:outset;
+	border-color:darkred;
+}
+.submitButton2:hover{
+	border-style:inset;
+}
+.submitButton1:hover{
+	border-style:inset;
 }

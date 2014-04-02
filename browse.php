@@ -14,10 +14,14 @@ include "db.php"; ?>
 			function loadInfo(id,mode){
 				if (mode=='hide'){
 					$('#popUp1').hide();
+					$('.miniBox').show();
+					$.backstretch('bg.jpg');
 				}else{
 					$('#popUp1').show();
+					$('.miniBox').hide();
 					$('#popUp1').text("Updating...");
 					$('#popUp1').load('browse2.php?mode=moreInfo&id='+id);
+					$.backstretch('bg.jpg');
 				}
 			}
 			$(window).scroll(function() {

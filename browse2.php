@@ -9,36 +9,43 @@ session_start('SR');
 	}
 	include "db.php";
 	if($_GET[mode]=='moreInfo'){
-		$id = $_GET[id];
+		$id = mysql_real_escape_string($_GET[id]);
 		$res1 = mysql_query("SELECT * FROM resources WHERE id='$id'") or die(mysql_error());
 			while($row = mysql_fetch_array($res1)){
 				$type = $row[type];
 				echo "<img src='$type.png' width='100' height='100' style='float:left;margin:0;'/>";
 				echo "<span class='x' onclick=\"loadInfo('0','hide')\"> X </span>";
-				$title = $row[title];
-				$description = $row[description];
-				$type = $row[type];
-				$user = $row[user];
+				$title = clearHTML($row[title]);
+				$description = clearHTML($row[description]);
+				$type = clearHTML($row[type]);
+				$user = clearHTML($row[user]);
 				$ext = $row[fileExt];
 				$date = date('M d, Y',strtotime($row[timestamp]));
 				if($user==''){$user="Unknown";}
-				echo "<b style='font-size:2em;'>$title</b><br/>";
-				echo "<b>Shared by: </b><span onclick=\"filterUser('$user')\">$user</span> <b>on</b> $date<br/>";
-				echo "<b>Description: </b><i>$description</i><br/>";
-				echo "<b>Category: </b>$category<br/>";
-				echo "<hr/>";
-				if($type=='script'){
-					if($program==''){$program='Unknown';}
-					echo "Made for $program<br/>";
-					echo "<b>";
-				}
-				$title = rawurlencode($title);
-				echo "<a href='uploads/$type/$id-$title.$ext'>Download</a> | ";
-				echo "<span class='link'>Download Help</span>";
-				echo "<br/>";
-				if($_SESSION[user]=='admin' or $_SESSION[user]==$user){
-					echo "<span class='link' style='color:red;' onclick=\"deleteItem('$row[id]')\">Delete</span>";
-				}
+					echo "<b style='font-size:2em;'>$title</b><br/>";
+					echo "<b>Shared by: </b><span onclick=\"filterUser('$user')\">$user</span> <b>on</b> $date<br/>";
+					echo "<b>Category: </b>$category";
+					echo "<hr/>";
+				echo "<table border='0' style='width:100%;'>";
+					echo "<tr>";
+						echo "<td style='width:50%;'>";
+							if($type=='script'){
+								if($program==''){$program='Unknown';}
+								echo "Made for $program<br/>";
+								echo "<b>";
+							}
+							$title = rawurlencode($title);
+							echo "<a href='uploads/$type/$id-$title.$ext'>Download</a> | ";
+							echo "<span class='link'>Download Help</span>";
+							echo "<br/>";
+							if($_SESSION[user]=='admin' or $_SESSION[user]==$user){
+								echo "<span class='link' style='color:red;' onclick=\"deleteItem('$row[id]')\">Delete</span>";
+							}
+						echo "</td>";
+						echo "<td style='border-left:2px solid black;width:50%;'>";
+							echo "<b>Description: </b><br/>$description<br/>";
+						echo "</td>";
+				
 			}
 	}elseif($_GET[mode]=='lessInfo'){
 		$res1 = mysql_query("SELECT * FROM resources WHERE id='$_GET[id]'") or die(mysql_error());

@@ -21,7 +21,7 @@ $.backstretch('bg.jpg');
 	?>
 	<!--Login-->
 	<div class='loginBox1 loginBox2' style='display:none;'>
-		<form action='login.php' method='post' enctype="multipart/form-data">
+		<form action='#' onsubmit='checkLogin()' method='post' enctype="multipart/form-data">
 			<table>
 			<tr><td class='loginBox3'>Username</td><td><input type='text' name='username' required='required'/></td></tr>
 			<tr><td class='loginBox3'>Password</td><td><input type='password' name='password' required='required'/></td></tr>

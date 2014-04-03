@@ -2,7 +2,7 @@
 	session_start('SR');
 	//Add Login Checker Here
 	include "db.php";
-	$type = $_POST[type];
+	$type = mysql_real_escape_string($_POST[type]);
 	$title = mysql_real_escape_string($_POST[title]);
 	$description = mysql_real_escape_string($_POST[description]);
 	if($type=='script'){

@@ -116,6 +116,9 @@ border-bottom: dotted white 3px;
 */
 padding: 3px;
 color: white;
+box-shadow:0px 0px -5px black;
+padding-bottom:0px;
+margin-top:-5px;
 }
 a:visited.login,a:active.login{
 color:white;
@@ -162,4 +165,31 @@ td.loginBox3{
 }
 .submitButton1:hover{
 	border-style:inset;
+}
+.searchButton{
+	width:15px;
+	height:15px;
+	margin-right:5px;
+}
+.searchButton:hover{
+	cursor:pointer;
+}
+.x2{
+	float: right;
+	background-color: lightgray;
+	width: 15;
+	margin-left: -7;
+	position: relative;
+	height: 17;
+	top: 1.4px;
+	padding: 2.1px;
+	border:1px outset #EBE9ED;
+	border-left:none;
+}
+.x2:hover{
+	cursor:pointer;
+	background-color:gray;
+	border-style:inset;
+	border-left:none;
+	color:red;
 }

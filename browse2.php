@@ -21,14 +21,15 @@ session_start('SR');
 				$user = clearHTML($row[user]);
 				$ext = $row[fileExt];
 				$date = date('M d, Y',strtotime($row[timestamp]));
+				$category = clearHTML($row[category]);
 				if($user==''){$user="Unknown";}
 					echo "<b style='font-size:2em;'>$title</b><br/>";
 					echo "<b>Shared by: </b><span onclick=\"filterUser('$user')\">$user</span> <b>on</b> $date<br/>";
 					echo "<b>Category: </b>$category";
 					echo "<hr/>";
-				echo "<table border='0' style='width:100%;'>";
+				echo "<table border='0' style='width:100%;height:375px;'>";
 					echo "<tr>";
-						echo "<td style='width:50%;'>";
+						echo "<td style='width:50%;vertical-align:top;'>";
 							if($type=='script'){
 								if($program==''){$program='Unknown';}
 								echo "Made for $program<br/>";
@@ -42,13 +43,14 @@ session_start('SR');
 								echo "<span class='link' style='color:red;' onclick=\"deleteItem('$row[id]')\">Delete</span>";
 							}
 						echo "</td>";
-						echo "<td style='border-left:2px solid black;width:50%;'>";
+						echo "<td style='border-left:2px solid black;width:50%;min-height:100px;vertical-align:top;overflow:scroll'>";
 							echo "<b>Description: </b><br/>$description<br/>";
 						echo "</td>";
-				
+				echo "</table>";
 			}
 	}elseif($_GET[mode]=='lessInfo'){
-		$res1 = mysql_query("SELECT * FROM resources WHERE id='$_GET[id]'") or die(mysql_error());
+		$id = mysql_real_escape_string($_GET[id]);
+		$res1 = mysql_query("SELECT * FROM resources WHERE id='$id'") or die(mysql_error());
 			while($row = mysql_fetch_array($res1)){
 				$type = clearHTML($row[type]);
 				$title = clearHTML($row[title]);
@@ -95,8 +97,11 @@ session_start('SR');
 			// $res1 = mysql_query("SELECT * FROM resources WHERE type='$type' ORDER BY $sort") or die(mysql_error());
 		// } //---Add back in if using type and sort for searches
 			$res1 = mysql_query("SELECT * FROM resources WHERE title LIKE '%$query%' OR user LIKE '%$query%'") or die(mysql_error());
-			if(mysql_num_rows($res1)==0){
+			$numResults = mysql_num_rows($res1);
+			if($numResults==0){
 				echo "No results were found.";
+			}else{
+				echo "Found <b>$numResults</b> results for your search \"$query\"";
 			}
 				while($row = mysql_fetch_array($res1)){
 					$type = clearHTML($row[type]);
@@ -105,7 +110,7 @@ session_start('SR');
 					$user = clearHTML($row[user]);
 					$date = date('Y-m-d');
 					if($user==''){$user="Unknown";}
-					echo "<div class='miniBox $row[id]' onclick=\"loadInfo('$row[id]')\" style='display:none;'>";
+					echo "<div class='miniBox $id' onclick=\"loadInfo('$row[id]')\" style='display:none;'>";
 						echo "<img src='$type.png' width='50' height='50' style='float:left;border:none;border-top-left-radius:5px;'/>";
 						echo "<b>$title</b><br/>";
 						echo "<b>Shared by</b> <span onclick=\"filterUser('$user')\">$user</span><br/>";
@@ -113,6 +118,7 @@ session_start('SR');
 					echo "</div>";
 				}
 	}elseif($_GET[mode]=='delete'){
-		mysql_query("DELETE FROM resources WHERE id='$_GET[id]'") or die(mysql_error());
+		$id = mysql_real_escape_string($_GET[id]);
+		mysql_query("DELETE FROM resources WHERE id='$id'") or die(mysql_error());
 	}
 ?>

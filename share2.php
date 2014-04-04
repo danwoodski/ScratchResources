@@ -5,6 +5,7 @@
 	$type = mysql_real_escape_string($_POST[type]);
 	$title = mysql_real_escape_string($_POST[title]);
 	$description = mysql_real_escape_string($_POST[description]);
+	$category = mysql_real_escape_string($_POST[category]);
 	if($type=='script'){
 		$program = $_POST[program];
 	}
@@ -20,7 +21,7 @@
 	}
 	$path = $_FILES['file']['name'];
 	$ext = pathinfo($path, PATHINFO_EXTENSION);
-	mysql_query("INSERT INTO resources (type,user,title,description,program,fileExt) VALUES ('$type','$_SESSION[user]','$title','$description','$program','$ext')") or die(mysql_error());
+	mysql_query("INSERT INTO resources (type,user,title,description,program,fileExt,category) VALUES ('$type','$_SESSION[user]','$title','$description','$program','$ext','$category')") or die(mysql_error());
 	$res1 = mysql_query("SELECT * FROM resources ORDER BY timestamp DESC LIMIT 0,1") or die(mysql_error());
 		while($row = mysql_fetch_array($res1)){
 			$id = $row[id];
@@ -56,7 +57,7 @@
 			}
 			break;
 		case "sound":
-			if($ext=='ogg' or $ext=='mp3' or $ext=='wma'){}else{
+			if($ext=='ogg' or $ext=='mp3' or $ext=='wma' or $ext=='wav'){}else{
 				die("Invalid File Type!");
 			}
 			break;

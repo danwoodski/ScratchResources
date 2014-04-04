@@ -41,8 +41,11 @@ include "db.php"; ?>
 					});
 				});
 			}
-			function search(){
-				var query = $('#search').val();
+			function search(query){
+				$('#loadingZone').text("Searching...");
+				if(query=='0'){
+					var query = $('#search').val();
+				}
 				$('.miniBox').fadeOut();
 				$('#loadingZone').load('browse2.php?mode=search&query='+query,function(){
 					$(".miniBox").each(function(index) {
@@ -67,7 +70,14 @@ include "db.php"; ?>
 		<link rel='stylesheet' href='main.css' type='text/css'/>
 	</head>
 
-	<body>
+		<?php
+			if($_GET[mode]=='search'){
+				$query = mysql_real_escape_string($_GET[query]);
+				echo "<body onload=\"search('$query')\">";
+			}else{
+				echo "<body>";
+			}
+		?>
 		<div class='mainBody'>
 		<div id='popUp1' style='display:none;'></div>
 			<?php 
@@ -81,8 +91,8 @@ include "db.php"; ?>
 			echo "</datalist>";
 			echo "<div id='navContainer' style='position:fixed;width:1000px;z-index:1;'>";
 				echo "<ul class='sideBar' style='float:right;'>";
-					echo "<li><input type='text' name='search' id='search' placeholder='Search...' list='titles' onchange='search()'/>
-						<button style='width:40px;' onclick='search()'>GO!</button>
+					echo "<li><input type='text' name='search' id='search' placeholder='Search...' list='titles' onchange='search(0)' style='width:130px;'/>
+						<button style='width:40px;' form=0' onclick='search(0)'>GO!</button>
 						</li>";
 					echo "<li>Sort By: <select name='sort' id='sort' onchange='sort()'>";
 						echo "<option value='timestamp'>Date Added</option>";

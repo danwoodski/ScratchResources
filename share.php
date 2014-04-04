@@ -17,6 +17,39 @@
 				}else if(type=='sound'){
 					$('#file').attr("accept","audio/*");
 				}
+				$('#category').empty();
+				if(type=='background'){
+					var options = 
+					"<option value='indoors'>Indoors</option>"+
+					"<option value='outdoors'>Outdoors</option>"+
+					"<option value='nature'>Nature</option>"+
+					"<option value='sports'>Sports</option>";
+				}else if(type=='sprite'){
+					var options = 
+					"<option value='animals'>Animals</option>"+
+					"<option value='fantasy'>Fantasy</option>"+
+					"<option value='letters'>Letters</option>"+
+					"<option value='people'>People</option>"+
+					"<option value='things'>Things</option>"+
+					"<option value='transportation'>Transportation</option>";
+				}else if(type=='script'){
+					var options = 
+					"<option value='movement'>Movement</option>"+
+					"<option value='math'>Math</option>"+
+					"<option value='lists'>Lists</option>"+
+					"<option value='misc'>Misc</option>";
+				}else if(type=='sound'){
+					var options = 
+					"<option value='animal'>Animal</option>"+
+					"<option value='effects'>Effects</option>"+
+					"<option value='electronic'>Electronic</option>"+
+					"<option value='human'>Human</option>"+
+					"<option value='instruments'>Instruments</option>"+
+					"<option value='music loops'>Music Loops</option>"+
+					"<option value='percussion'>Percussion</option>"+
+					"<option value='vocals'>Vocals</option>";
+				}
+				$('#category').append(options)
 			}
 		</script>
 	</head>
@@ -39,6 +72,14 @@
 						<input type='radio' name='type' id='type' value='script' onchange='InterForm(this.value)'>Script
 						<input type='radio' name='type' id='type' value='sound' onchange='InterForm(this.value)'>Sound
 					<br/><br/>
+					Category
+						<select id='category' name='category'>
+							<option value='indoors'>Indoors</option>
+							<option value='outdoors'>Outdoors</option>
+							<option value='nature'>Nature</option>
+							<option value='sports'>Sports</option>
+						</select>
+						<br/>
 					<!--Script Only-->
 					<div class='script optional' style='display:none;'>
 					Which mod is your script made for?
